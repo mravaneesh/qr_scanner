@@ -45,15 +45,18 @@ var dw="amount"
 let id;
   function success(result) {
     id=result;
+     if(result===dw){
       document.getElementById('result').innerHTML = `
-       if(result===dw){
       <h2>Success!</h2>
       <p><a href="${result}">${result}</a></p>
       `;
       // Prints result as a link inside result element
   }
    else{
-        alert("failure");
+         document.getElementById('result').innerHTML = `
+      <h2>Failure!</h2>
+      
+      `;
       }
       scanner.clear();
       // Clears scanning instance
