@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Qr scanner</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js" integrity="sha512-k/KAe4Yff9EUdYI5/IAHlwUswqeipP+Cp5qnrsUjTPCgl51La2/JhyyjNciztD7mWNKLSXci48m7cctATKfLlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mongoose@6.9.0/dist/browser.umd.min.js"></script>
   <style>
     main {
         display: flex;
@@ -40,9 +41,7 @@
 
   scanner.render(success, error);
   // Starts scanner
-
- var dw="amount"
- 
+var dw="amount"
 let id;
   function success(result) {
     id=result;
@@ -69,6 +68,21 @@ let id;
       console.error(err);
       // Prints any errors to the console
   }
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  //Find the first document in the customers collection:
+  dbo.collection("customers").findOne({}, function(err, result) {
+    if (err) throw err;
+    console.log(result.name);
+    db.close();
+  });
+});
+
 
 </script>
 </body>
